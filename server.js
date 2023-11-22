@@ -4,8 +4,8 @@ const PORT = 8000
 
 const discography = {
     "upbeats and beatdowns": {
-        releaseYear: 1996,
-        tracks: [
+        "releaseYear": 1996,
+        "tracks": [
             "the old west",
             "where zero meets 15",
             "these are not my pants (the rock opera)",
@@ -20,8 +20,8 @@ const discography = {
         ]
         },
     "our newest album ever!": {
-    releaseYear: 1997,
-    tracks: [
+    "releaseYear": 1997,
+    "tracks": [
         "handbook for the sellout",
         "at least i'm not like all those other old guys",
         "shut up",
@@ -36,8 +36,8 @@ const discography = {
         ]
     },
     "all the hype that money can buy": {
-    releaseYear: 2000,
-    tracks: [
+    "releaseYear": 2000,
+    "tracks": [
         "the phantom mullet",
         "blue comb '78",
         "new year's eve",
@@ -52,8 +52,8 @@ const discography = {
         ]
     },
     "five iron frenzy 2: electric boogaloo": {
-    releaseYear: 2001,
-    tracks: [
+    "releaseYear": 2001,
+    "tracks": [
         "pre-ex-girlfriend",
         "far, far away",
         "wizard needs food, badly",
@@ -68,8 +68,8 @@ const discography = {
       ]
     },
     "the end is near": {
-    releaseYear: 2003,
-    tracks: [
+    "releaseYear": 2003,
+    "tracks": [
         "cannonball",
         "at least i'm not like all those other old guys",
         "so far, so bad",
@@ -84,8 +84,8 @@ const discography = {
         ]
     },
     "the end is here": {
-        releaseYear: 2004,
-        tracks: [
+        "releaseYear": 2004,
+        "tracks": [
             "intro",
             "old west",
             "handbook for the sellout",
@@ -109,8 +109,8 @@ const discography = {
         ]
     },
     "engine of a million plots": {
-        releaseYear: 2013,
-        tracks: [
+        "releaseYear": 2013,
+        "tracks": [
             "against a sea of troubles",
             "so far",
             "zen & the art of xenophobia",
@@ -127,8 +127,8 @@ const discography = {
         ]
     },
     "until this shakes apart": {
-        releaseYear: 2021,
-        tracks: [
+        "releaseYear": 2021,
+        "tracks": [
             "lonesome for her heroes",
             "wildcat",
             "while supplies last",
@@ -144,23 +144,7 @@ const discography = {
             "tyrannis"
             // Add more tracks as needed
         ]
-    },
-    "the end is near": {
-        releaseYear: 2003,
-        tracks: [
-            "cannonball",
-            "at least i'm not like all those other old guys",
-            "so far, so bad",
-            "new year's eve",
-            "american kryptonite",
-            "anchors away",
-            "something like laughter",
-            "that's how the story ends",
-            "on distant shores",
-            "wizard needs food, badly"
-            // Add more tracks as needed
-        ]
-    }        
+    }      
 };
 
 
@@ -168,8 +152,30 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/api',(req, res) => {
+app.get('/api/',(req, res) => {
     res.json(discography)
+})
+
+app.get('/api/:album',(req, res) => {
+    const albumName = req.params.album.toLowerCase()
+    if (discography[albumName]){
+        res.json(discography[albumName])
+    }
+})
+
+app.get('/api/:album/tracklist',(req, res) => {
+    const albumName = req.params.album.toLowerCase()
+    if (discography[albumName]){
+        res.json(discography[albumName].tracks)
+    }
+})
+
+app.get('/api/:album/tracklist/:tracknumber',(req, res) => {
+    const albumName = req.params.album.toLowerCase()
+    const trackNumber = Number(req.params.tracknumber)
+    if (discography[albumName]){
+        res.json(discography[albumName].tracks[trackNumber - 1])
+    }
 })
 
 app.listen(process.env.PORT || PORT, () => {
