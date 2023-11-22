@@ -172,6 +172,6 @@ app.get('/api',(req, res) => {
     res.json(discography)
 })
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is now running on port ${PORT}`)
 })
