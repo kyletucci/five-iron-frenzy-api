@@ -36,21 +36,6 @@ app.get('/:album',(req, res) => {
     })
 })
 
-app.get('/api/:album/tracklist',(req, res) => {
-    const albumName = req.params.album.toLowerCase()
-    if (discography[albumName]){
-        res.json(discography[albumName].tracks)
-    }
-})
-
-app.get('/api/:album/tracklist/:tracknumber',(req, res) => {
-    const albumName = req.params.album.toLowerCase()
-    const trackNumber = Number(req.params.tracknumber)
-    if (discography[albumName]){
-        res.json(discography[albumName].tracks[trackNumber - 1])
-    }
-})
-
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is now running on port ${PORT}`)
 })
