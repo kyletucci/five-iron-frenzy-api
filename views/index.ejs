@@ -1,0 +1,16 @@
+<h1>Five Iron Frenzy Discography</h1>
+<ul class="albums">
+    <% for(let i = 0; i < info.length; i++) {%>
+        <li class="album">
+            <span><%= info[i].albumTitle %></span>
+            <span>(<%= info[i].releaseYear %>)</span>
+            <ul class="tracklist">
+                <% info[i].tracklist.forEach(track => { %>
+                    <li class="track">
+                        <span><%= track %></span>
+                    </li>
+                <% }) %>
+            </ul>
+        </li>
+    <% } %>
+</ul>

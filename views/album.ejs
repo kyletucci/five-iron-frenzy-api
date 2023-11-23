@@ -1,0 +1,11 @@
+<% for(let i = 0; i < info.length; i++) {%>
+<h1><%= info[i].albumTitle %> (<%= info[i].releaseYear %>)</h1>
+<h3>Tracklist:</h3>
+<ul class="tracklist">
+    <% info[i].tracklist.forEach(track => { %>
+        <li class="track">
+            <span><%= track %></span>
+        </li>
+    <% }) %>
+    </ul>
+<% } %>
